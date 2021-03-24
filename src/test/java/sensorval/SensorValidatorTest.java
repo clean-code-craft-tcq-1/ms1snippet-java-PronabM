@@ -58,6 +58,13 @@ public class SensorValidatorTest
         assertFalse(SensorValidator.validateCurrentreadings(currents));
     }
     @Test
+    public void reportsErrorWhenCurrentContainsNaN()
+    {
+        Double[] readings = {0.03, 0.03, Double.NaN, 0.33};
+        List<Double> currents = Arrays.asList(readings);
+        assertFalse(SensorValidator.validateCurrentreadings(currents));
+    }
+    @Test
     public void reportsErrorWhenSOCIsNull()
     {
        List<Double> readings = null;
@@ -73,6 +80,13 @@ public class SensorValidatorTest
     public void reportsErrorWhenSOCContainsNull()
     {
         Double[] readings = {0.03, 0.03, null, 0.33};
+        List<Double> socs = Arrays.asList(readings);
+        assertFalse(SensorValidator.validateSOCreadings(socs));
+    }
+    @Test
+    public void reportsErrorWhenSOCContainsNaN()
+    {
+        Double[] readings = {0.03, 0.03, Double.NaN, 0.33};
         List<Double> socs = Arrays.asList(readings);
         assertFalse(SensorValidator.validateSOCreadings(socs));
     }
